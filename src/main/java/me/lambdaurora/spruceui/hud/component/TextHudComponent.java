@@ -14,8 +14,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import org.aperlambda.lambdacommon.Identifier;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.util.Identifier;
 
 /**
  * Represents a text HUD component.
@@ -29,11 +28,11 @@ public class TextHudComponent extends HudComponent {
     protected Text text;
     protected int color;
 
-    public TextHudComponent(@NotNull Identifier identifier, int x, int y, Text text) {
+    public TextHudComponent(Identifier identifier, int x, int y, Text text) {
         this(identifier, x, y, text, 0xffffffff);
     }
 
-    public TextHudComponent(@NotNull Identifier identifier, int x, int y, Text text, int color) {
+    public TextHudComponent(Identifier identifier, int x, int y, Text text, int color) {
         super(identifier, x, y);
         this.client = MinecraftClient.getInstance();
         this.text = text;

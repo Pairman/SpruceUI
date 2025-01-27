@@ -9,17 +9,17 @@
 
 package me.lambdaurora.spruceui.hud;
 
+import me.lambdaurora.spruceui.util.Identifiable;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
-import org.aperlambda.lambdacommon.Identifier;
-import org.aperlambda.lambdacommon.utils.Identifiable;
-import org.aperlambda.lambdacommon.utils.function.Predicates;
+import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Represents a HUD.
@@ -34,12 +34,8 @@ public abstract class Hud extends DrawableHelper implements Identifiable {
     private boolean enabled = true;
     protected boolean visible = true;
 
-    public Hud(@NotNull Identifier identifier) {
+    public Hud(Identifier identifier) {
         this.identifier = identifier;
-    }
-
-    public Hud(@NotNull net.minecraft.util.Identifier identifier) {
-        this(new Identifier(identifier.toString()));
     }
 
     /**
@@ -48,7 +44,7 @@ public abstract class Hud extends DrawableHelper implements Identifiable {
      * @return The translation key.
      */
     public String getTranslationKey() {
-        return this.identifier.getNamespace() + ".hud." + this.identifier.getName();
+        return this.identifier.getNamespace() + ".hud." + this.identifier.getPath();
     }
 
     /**
@@ -112,7 +108,8 @@ public abstract class Hud extends DrawableHelper implements Identifiable {
      * @see #hasTicks()
      */
     public void tick() {
-        this.components.stream().filter(Predicates.and(HudComponent::hasTicks, HudComponent::isEnabled)).forEach(HudComponent::tick);
+        this.components.stream().filter(((Predicate<HudComponent>) HudComponent::hasTicks).and(HudComponent::isEnabled))
+                .forEach(HudComponent::tick);
     }
 
     /**

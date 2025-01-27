@@ -9,9 +9,9 @@
 
 package me.lambdaurora.spruceui.test;
 
+import me.lambdaurora.spruceui.util.Nameable;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import org.aperlambda.lambdacommon.utils.Nameable;
 import org.jetbrains.annotations.NotNull;
 
 /**
